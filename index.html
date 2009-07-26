@@ -1,0 +1,54 @@
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+    <input type="text" id="clicked"></br>
+<div id="flashcontent" name="flashcontent" style="z-index=0;position:absolute">
+        <strong>You need to install <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Flash Player</a> (or turn it back on in your browser settings).</strong>
+</div>
+<br/>
+Select here to change the color of the block (js => flash communication).
+<br/>
+<select id="color">
+    <option value="0xff0000">red</option>
+    <option value="0x00ff00">green</option>
+    <option value="0x0000ff">blue</option>
+</select>
+(<a href="http://picasaweb.google.com/lh/photo/YWVSAVvjtd_imFSJkt18kA" target="_new">Image under CC</a>)
+
+
+<script type="text/javascript">
+    // <![CDATA[
+    var get = swfobject.getQueryParamValue;
+    var width = get('w') || "600"; 
+    var height = get('h') || "600"; 
+    var params = {'bgcolor': '#FFFFFF'};
+    var flashVars = {
+        'n'        : get('n') || 3
+    };
+
+    swfobject.embedSWF("learnflash.swf", "flashcontent", width, height, "9.0.0"
+            , "expresssinstall.swf", flashVars, params, {});
+
+    jQuery('#color').change(function(){
+        jQuery('#flashcontent')[0].changeColor(this.value);
+    });
+
+    // this function is called from flash when the smiley face image is clicked.
+    function handle_flash_image_click(x, y, intcolor){
+        var hexcolor = '#' + intcolor.toString(16);
+        /// show the x, y (relative to the image) and change the font color
+        /// to the color of the pixel that was clicked.
+        jQuery('#clicked').val(x + "," + y).css({'color': hexcolor});
+        
+    }
+
+    // ]]>
+</script>
+</body>
+</html>

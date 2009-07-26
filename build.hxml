@@ -1,0 +1,6 @@
+-swf learnflash.swf
+-swf-version 9
+-main LearnFlash
+-swf-header 400:400:20
+--flash-strict
+--no-traces
